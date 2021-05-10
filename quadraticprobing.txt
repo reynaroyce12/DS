@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#define size 10
+
+int h[size]={NULL};
+
+void insert()
+{
+	int key,i,index,ele,flag;
+	flag=0;
+	printf("\n Enter the value to the hash table: \n");
+	scanf("%d",&ele);
+	
+	key=ele%size;
+	for(i=0;i<size;i++){
+		index=(key+i*i)%size;
+		
+		if(h[index]==NULL){
+			h[index]=ele;
+			break;
+		}
+	}
+	if(i==size){
+		for(;i>=size;i++){
+			index=(key+i*i)%size;
+			h[index]=ele;
+		}
+	}
+}
+
+//----------------------------------------------------------------
+
+void search()
+{
+	int i,index,key,flag,ele;
+	flag=0;
+	
+	printf("\n Enter an element for searching: \n");
+	scanf("%d",&ele);
+	
+	key=ele%size;
+	for(i=0;i<size;i++){
+		index=(key+i*i)%size;
+        if(h[index]==ele){
+		printf("\nValue is found at index %d \n",index);
+		break;
+	}else{
+        if(h[index]==NULL){
+        	printf("\n Error 404!! \n");
+        	break;
+	    }
+	}
+  }
+
+    if(i==size){
+  	for(;i>=size;i++){
+			index=(key+i*i)%size;
+			h[index]=ele;
+       }
+   }
+}
+
+
+
+//--------------------------------------------------------------
+
+void display()
+{
+	int i;
+	printf("\n elements in the has table are: \n");
+	for(i=0;i<size;i++){
+		printf("\n At index %d -\t value = %d \n",i,h[i]);
+	}
+}
+
+//------------------------------------------------------------
+
+int main()
+{
+	int i,choice;
+	
+	while(1){
+	printf("\n\t\t--------------PROGRAM TO PERFORM QUADRATIC PROBING IN HASH TABLE-------------");
+	printf("\n");
+	printf("\n\t\t\t\t--------------MENU------------");
+	printf("\n 1. INSERT ");
+	printf("\n 2. SEARCH ");
+	printf("\n 3. DISPLAY ");
+	printf("\n 4. EXIT  ");
+	
+	printf("\n Enter your choice from the menu: \n");
+	scanf("%d",&choice);
+	
+	switch(choice){
+		case 1:
+			{
+				insert();
+				printf("\n element inserted! ");
+				break;
+			}
+		case 2:
+			{
+				search();
+				break;
+			}
+		case 3:
+			{
+				display();
+				break;
+			}
+		case 4:
+			{
+				printf("\n Keep coding!!");
+				exit(0);
+			}
+	}
+}
+}

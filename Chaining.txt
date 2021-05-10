@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#define size 10
+
+struct node{
+	int data;
+	struct node *next;
+};
+
+struct node *a[size]={NULL};
+struct node *p;
+
+int insert()
+{
+	struct node *hash;
+	int i,key;
+	printf("\n Enter the value you want to insert in to the Hash table: \n");
+	scanf("%d",&key);
+	i=key%size;
+	hash=(struct node*)malloc(sizeof(struct node));
+	hash->data=key;
+	hash->next=NULL;
+	
+	
+	if(a[i]==NULL){
+		a[i]=hash;
+	}else{
+		p=a[i];
+	while(p->next!=NULL){
+		p=p->next;
+	}
+	p->next=hash;
+	}
+}
+
+//------------------------------------------------------------------------
+
+void search()
+{
+	int key,index,i;
+	printf("\nEnter the element to be searched: \n");
+	scanf("%d",&key);
+	
+	index=key%size;
+	if(a[index]==NULL){
+		printf("\n Element not found \n");
+	}else{
+		for(p=a[index];p!=NULL;p=p->next){
+			if(p->data==key){
+				printf("\n Element is found at index %d! \n",index);
+				break;
+			}
+		}
+	}
+	if(i==size){
+		printf("\nElement not found! \n");
+	}
+}
+
+//--------------------------------------------------------------------------
+
+void display()
+{
+	int i;
+	for(i=0;i<size;i++){
+		printf("\n At index %d \n",i);
+			if(a[i]==NULL){
+				printf("\n No hash entry \n");
+			}else{
+				for(p=a[i];p!=NULL;p=p->next){
+					printf("%d-->",p->data);
+				}
+			}
+		}
+}
+
+//--------------------------------------------------------------------------
+
+int main()
+{
+	int i,choice;
+	
+	while(1){
+	printf("\n\t\t--------------PROGRAM TO PERFORM CHAINING IN HASH TABLE-------------");
+	printf("\n");
+	printf("\n\t\t\t\t--------------MENU------------");
+	printf("\n 1. INSERT ");
+	printf("\n 2. SEARCH ");
+	printf("\n 3. DISPLAY ");
+	printf("\n 4. EXIT  ");
+	
+	printf("\n Enter your choice from the menu: \n");
+	scanf("%d",&choice);
+	
+	switch(choice){
+		case 1:
+			{
+				insert();
+				printf("\n element inserted! ");
+				break;
+			}
+		case 2:
+			{
+				search();
+				break;
+			}
+		case 3:
+			{
+				display();
+				break;
+			}
+		case 4:
+			{
+				exit(0);
+			}
+	}
+}
+}
